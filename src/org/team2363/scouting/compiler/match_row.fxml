@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.team2363.scouting.compiler.MatchRow">
+   <children>
+      <MenuButton fx:id="mbtn_match_num" blendMode="SRC_ATOP" maxWidth="75.0" minWidth="75.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="75.0" text="Q116">
+        <items>
+          <MenuItem fx:id="mitem_scouting_report" mnemonicParsing="false" onAction="#onclick_mItemScoutingReport" text="Alliance Scouting Report" />
+        </items>
+         <HBox.margin>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </HBox.margin>
+      </MenuButton>
+      <Separator orientation="VERTICAL" />
+      <HBox prefWidth="200.0">
+         <children>
+            <Button fx:id="btn_red1" mnemonicParsing="false" onMouseClicked="#onclick_red1" prefWidth="60.0" text="2363">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btn_red2" mnemonicParsing="false" onMouseClicked="#onclick_red2" prefWidth="60.0" text="456">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btn_red3" mnemonicParsing="false" onMouseClicked="#onclick_red3" prefWidth="60.0" text="11">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox prefWidth="200.0">
+         <children>
+            <Button fx:id="btn_blue1" mnemonicParsing="false" onMouseClicked="#onclick_blue1" prefWidth="60.0" text="11">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="24.0" right="4.0" top="4.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btn_blue2" mnemonicParsing="false" onMouseClicked="#onclick_blue2" prefWidth="60.0" text="11">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btn_blue3" mnemonicParsing="false" onMouseClicked="#onclick_blue3" prefWidth="60.0" text="11">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</HBox>

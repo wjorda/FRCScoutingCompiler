@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.team2363.scouting.compiler.Settings">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="600.0">
+         <children>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" text="Blue Alliance Event Key: ">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="txt_event_year" prefHeight="25.0" prefWidth="60.0" promptText="2015">
+                     <HBox.margin>
+                        <Insets right="4.0" />
+                     </HBox.margin></TextField>
+                  <TextField fx:id="txt_event_key" prefHeight="25.0" prefWidth="60.0" promptText="VARI">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label fx:id="lbl_scoresheet" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Scoresheet XML: ...">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="btn_select_scoresheet" mnemonicParsing="false" onMouseClicked="#onclick_btnSelectScoresheet" text="Browse..." />
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label fx:id="lbl_output" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Output File: ...">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="btn_select_output" mnemonicParsing="false" onMouseClicked="#onclick_btnSelectOutput" text="Browse..." />
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <CheckBox fx:id="cbox_device_schedules" alignment="CENTER_RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" selected="true" text="Generate Device Schedules" />
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </VBox>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+            <Button fx:id="btn_cancel" cancelButton="true" mnemonicParsing="false" onMouseClicked="#onclick_btnCancel" text="Cancel" />
+          <Button fx:id="btn_apply" defaultButton="true" mnemonicParsing="false" onMouseClicked="#onclick_btnApply" text="Apply Settings" />
+        </items>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </ToolBar>
+   </children>
+</VBox>

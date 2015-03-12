@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="ScoutingCompilerFX">
+    <output-path>$PROJECT_DIR$/out/artifacts/ScoutingCompilerFX</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="org.team2363.scouting.compiler.Main" />
+        <option name="description" value="" />
+        <option name="height" value="600" />
+        <option name="htmlParamFile" value="" />
+        <option name="paramFile" value="" />
+        <option name="title" value="Scouting Compiler" />
+        <option name="vendor" value="Team 2363" />
+        <option name="width" value="900" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="ScoutingCompilerFX.jar">
+        <element id="module-output" name="ScoutingCompilerFX" />
+        <element id="library" level="project" name="json-20141113" />
+      </element>
+    </root>
+  </artifact>
+</component>

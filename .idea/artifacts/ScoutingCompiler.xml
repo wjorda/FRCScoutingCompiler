@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="ScoutingCompiler">
+    <output-path>$PROJECT_DIR$/out/artifacts/ScoutingCompiler</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="org.team2363.scouting.compiler.Main" />
+        <option name="description" value="An application for gathering scouting data." />
+        <option name="height" value="600" />
+        <option name="htmlParamFile" value="" />
+        <option name="paramFile" value="" />
+        <option name="title" value="Triple Helix Scouting compiler" />
+        <option name="vendor" value="FRC Team 2363 Triple Helix" />
+        <option name="width" value="900" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="JavaFXApp.jar">
+        <element id="module-output" name="ScoutingCompilerFX" />
+        <element id="library" level="project" name="json-20141113" />
+      </element>
+    </root>
+  </artifact>
+</component>
