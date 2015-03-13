@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
+/**
+ * Main launcher class.
+ */
 public class Main extends Application {
 
 	private static Stage primaryStage;
@@ -33,9 +36,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-	public static void hopeless(List<? super Object> args)
-	{
-		System.out.println(args.get(0).getClass());
-	}
 }

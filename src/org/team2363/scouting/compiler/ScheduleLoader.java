@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Worker thread for loading event schedules from BlueAlliance in the background.
+ */
 public class ScheduleLoader extends Thread
 {
 	private final String eventKey;
@@ -16,6 +19,11 @@ public class ScheduleLoader extends Thread
 	private OnScheduleLoadedListener listener;
 	private boolean started = false;
 
+	/**
+	 * Creates a new ScheduleLoader given a year and event key.
+	 * @param year The year in which the event takes place.
+	 * @param eventKey The string key of the event. See <link></link> for information.
+	 */
 	public ScheduleLoader(int year, String eventKey)
 	{
 		this.year = year;
@@ -23,6 +31,12 @@ public class ScheduleLoader extends Thread
 		scheduleOutput = null;
 	}
 
+	/**
+	 * Creates a new ScheduleLoader, given a year and a event key, as well as a directory to output device schedules.
+	 * @param year The year in which the event takes place.
+	 * @param eventKey The string key of the event. See <link></link> for information.
+	 * @param outputDeviceSchedules The directory to put CSV formatted device schedules, for use within the FRCScouting Android app.
+	 */
 	public ScheduleLoader(int year, String eventKey, File outputDeviceSchedules)
 	{
 		this.year = year;
@@ -30,6 +44,10 @@ public class ScheduleLoader extends Thread
 		this.scheduleOutput = outputDeviceSchedules;
 	}
 
+	/**
+	 * Starts the thread with an OnScheduleLoadedListener attached, to be run at the end of execution.
+	 * @param listener An OnScheduleLoadedListener to run at the end of execution.
+	 */
 	public void start(OnScheduleLoadedListener listener)
 	{
 		started = true;
@@ -91,9 +109,15 @@ public class ScheduleLoader extends Thread
 		return started;
 	}
 
-
+	/**
+	 * Callback interface used once the schedule is finished loading.
+	 */
 	public interface OnScheduleLoadedListener
 	{
+		/**
+		 * Called when the schedule has finished loading (on background thread)
+		 * @param matches The loaded schedule.
+		 */
 		public void onScheduleLoaded(MatchData[][] matches);
 	}
 }
