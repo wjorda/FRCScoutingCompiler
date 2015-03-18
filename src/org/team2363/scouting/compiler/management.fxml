@@ -21,7 +21,7 @@
                   <MenuItem fx:id="mitem_open" mnemonicParsing="false" onAction="#onclick_mitemOpen" text="Open..." />
                </items>
           </Menu>
-            <!--<Menu mnemonicParsing="false" text="Pit Scouting">
+            <Menu mnemonicParsing="false" text="Pit Scouting">
               <items>
                   <MenuItem mnemonicParsing="false" onAction="#onclick_mitemGetPitScouting" text="Get Team Report" />
                   <Menu mnemonicParsing="false" text="Import Data">
@@ -31,7 +31,7 @@
                     </items>
                   </Menu>
               </items>
-            </Menu>-->
+            </Menu>
             <Menu mnemonicParsing="false" text="Export">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#onclick_mItemToCSV" text="To CSV File" />
@@ -50,7 +50,7 @@
                <children>
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                     <items>
-                        <Label fx:id="lbl_detail_header" text="                                      ">
+                        <Label fx:id="lbl_detail_header" text="Team 2363 - Match Q166">
                            <font>
                               <Font size="20.0" />
                            </font>

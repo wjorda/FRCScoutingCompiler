@@ -11,19 +11,11 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-/**
- * JSONObject wrapper containing scouted team and match data.
- */
 public class MatchData
 {
 	private JSONObject data;
 	private final int matchNum, teamNum;
 
-	/**
-	 * Creates a blank MatchData object with no match data
-	 * @param matchNum
-	 * @param teamNum
-	 */
 	public MatchData(int matchNum, int teamNum)
 	{
 		data = null;
@@ -31,10 +23,6 @@ public class MatchData
 		this.matchNum = matchNum;
 	}
 
-	/**
-	 * Creates a MatchData object from a JSONObject.
-	 * @param json JSONObject containing team match data.
-	 */
 	public MatchData(JSONObject json)
 	{
 		if(json.length() > 2) data = json;
@@ -44,18 +32,11 @@ public class MatchData
 		teamNum = json.getInt("team_number");
 	}
 
-	/**
-	 * Creates a MatchData object from JSON-formatted text.
-	 * @param json Stirng containing json-formatted scouting data.
-	 */
 	public MatchData(String json)
 	{
 		this(new JSONObject(json));
 	}
 
-	/**
-	 * @return The official number of the match.
-	 */
 	public int getMatchNum()
 	{
 		return matchNum;
@@ -63,9 +44,6 @@ public class MatchData
 
 	public IntegerProperty matchNumProperty() { return new SimpleIntegerProperty(matchNum); }
 
-	/**
-	 * @return the number of the team playing in this match.
-	 */
 	public int getTeamNum()
 	{
 		return teamNum;
@@ -73,28 +51,16 @@ public class MatchData
 
 	//public int teamNumProperty() { return teamNum; }
 
-	/**
-	 * @return true if this match has data, false otherwise.
-	 */
 	public boolean hasData()
 	{
 		return (data != null);
 	}
 
-	/**
-	 * Gets a value from a this match's data.
-	 * @param id The json key for this value.
-	 * @return The JSON object that corresponds to the id given, null if it does not exist.
-	 */
 	public JSONObject getData(String id)
 	{
-		return data.optJSONObject(id);
+		return data.getJSONObject(id);
 	}
 
-	/**
-	 * Sets the match data.
-	 * @param json JSO object containing the match data.
-	 */
 	public void setData(JSONObject json)
 	{
 		data = json;
@@ -106,10 +72,6 @@ public class MatchData
 		return String.valueOf(teamNum);
 	}
 
-	/**
-	 * Get the JSONObject that contains all of the data, including team num and match num.
-	 * @return
-	 */
 	public JSONObject getData()
 	{
 		if(data != null) return data;

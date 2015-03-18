@@ -7,19 +7,8 @@ import org.json.JSONObject;
 
 import java.io.*;
 
-/**
- * Static class containing methods to read files from both internal and external volumes.
- */
 public class AccessFiles
 {
-	/**
-	 * Private constructor to defeat instantiation
-	 */
-	private AccessFiles(){}
-
-	/**
-	 * Searches through all connected media to find usable scouting data.
-	 */
 	public static void scan()
 	{
 		String os = System.getProperty("os.name");
@@ -71,11 +60,6 @@ public class AccessFiles
 		}
 	}
 
-	/**
-	 * Reads the text from a java.io.File.
-	 * @param file The File to read text from.
-	 * @return The string content of the File.
-	 */
 	public static String readFile(File file)
 	{
 		try (BufferedReader r = new BufferedReader(new FileReader(file))) {
@@ -91,9 +75,16 @@ public class AccessFiles
 		}
 	}
 
-	//TODO: Scanning on Windoze
 	private static void scanWindows()
 	{
+		for(char driveLetter = 'A'; driveLetter <= 'Z'; driveLetter++)
+		{
+			File scoutingDir = new File(driveLetter + ":" + File.separator + "Scouting");
+			if(!scoutingDir.exists() || !scoutingDir.isDirectory()) continue;
+			for (File file : scoutingDir.listFiles(pathname -> pathname.getPath().endsWith(".json")))
+				if ((file.exists() && file.canRead()) && (file.getName().startsWith("red") || file.getName().startsWith("blue")))
+					collectMatches(file);
 
+		}
 	}
 }

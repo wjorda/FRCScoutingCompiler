@@ -20,7 +20,7 @@ public class Match implements Comparable<Match>
 		this.set_number = json.getInt("set_number");
 		this.match_number = json.getInt("match_number");
 		this.event_key = json.getString("event_key");
-		this.time_string = json.getString("time_string");
+		this.time_string = json.optString("time_string");
 		this.level = MatchCompetitionLevel.getInstance(json.getString("comp_level"));
 		this.timestamp = json.getLong("time");
 
