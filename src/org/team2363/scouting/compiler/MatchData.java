@@ -58,7 +58,7 @@ public class MatchData
 
 	public JSONObject getData(String id)
 	{
-		return data.getJSONObject(id);
+		return data.optJSONObject(id);
 	}
 
 	public void setData(JSONObject json)

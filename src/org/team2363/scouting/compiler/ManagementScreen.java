@@ -283,19 +283,21 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 
 				for (Field field : fields) {
 					String type = field.getString("type"), id = field.getString("id");
-					prototype.put(id, data.getData(id).get(MatchHistoryViewer.getFieldName(type)).toString());
+
+					if(data.getData(id) != null)
+						prototype.put(id, data.getData(id).get(MatchHistoryViewer.getFieldName(type)).toString());
 				}
 
 				dataOut.put(prototype);
 
-				JSONArray stackInfo = data.getData("totes").getJSONArray(MatchHistoryViewer.getFieldName("toteStacker"));
+				/*JSONArray stackInfo = data.getData("totes").getJSONArray(MatchHistoryViewer.getFieldName("toteStacker"));
 				for(int i=0; i<stackInfo.length(); i++)
 				{
 					JSONObject stackPrototype = stackInfo.getJSONObject(i);
 					stackPrototype.put("teamNum", data.getTeamNum());
 					stackPrototype.put("matchNum", data.getMatchNum());
 					stackOut.put(stackPrototype);
-				}
+				}*/
 			}
 
 		try {
@@ -307,10 +309,10 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 
 			out = CDL.toString(stackOut);
 			System.out.println(out);
-			BufferedWriter writer2 = new BufferedWriter(new FileWriter(csvOut.getParent() + File.separator + csvOut.getName().replace(".csv", "") + ".stacks.csv"));
+			/*BufferedWriter writer2 = new BufferedWriter(new FileWriter(csvOut.getParent() + File.separator + csvOut.getName().replace(".csv", "") + ".stacks.csv"));
 			writer2.write(out);
 			writer2.flush();
-			writer2.close();
+			writer2.close();*/
 
 			System.out.println("Data successfully written to " + csvOut.getParent() + File.separator + "stacks.csv");
 		} catch (IOException e) {
@@ -412,6 +414,11 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 		Platform.runLater(() -> updateRows(true));
 	}
 
+	@FXML
+	void showAboutScreen(ActionEvent event) {
+
+	}
+
 	public void requestFinish()
 	{
 		deviceLoader.requestFinish();
@@ -428,9 +435,10 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 				try {
 					if(matchData != null) AccessFiles.scan();
 					sleep(1000);
-				} catch (InterruptedException ex) {
+				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
+
 			}
 		}
 

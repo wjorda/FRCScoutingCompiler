@@ -77,14 +77,6 @@ public class AccessFiles
 
 	private static void scanWindows()
 	{
-		for(char driveLetter = 'A'; driveLetter <= 'Z'; driveLetter++)
-		{
-			File scoutingDir = new File(driveLetter + ":" + File.separator + "Scouting");
-			if(!scoutingDir.exists() || !scoutingDir.isDirectory()) continue;
-			for (File file : scoutingDir.listFiles(pathname -> pathname.getPath().endsWith(".json")))
-				if ((file.exists() && file.canRead()) && (file.getName().startsWith("red") || file.getName().startsWith("blue")))
-					collectMatches(file);
 
-		}
 	}
 }
