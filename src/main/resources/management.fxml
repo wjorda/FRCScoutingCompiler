@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.input.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.team2363.scouting.compiler.ManagementScreen">
+<VBox xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.team2363.scouting.compiler.ManagementScreen">
    <children>
       <MenuBar>
         <menus>
@@ -17,8 +22,8 @@
                   <KeyCodeCombination alt="UP" code="M" control="UP" meta="UP" shift="UP" shortcut="ANY" />
                </accelerator>
                <items>
-                  <MenuItem fx:id="mitem_new" mnemonicParsing="false" onAction="#onclick_mitemNew" text="New..." />
-                  <MenuItem fx:id="mitem_open" mnemonicParsing="false" onAction="#onclick_mitemOpen" text="Open..." />
+                  <MenuItem fx:id="mitem_new" mnemonicParsing="false" onAction="#onclick_mitemNew" text="Start New Event..." />
+                  <MenuItem fx:id="mitem_open" mnemonicParsing="false" onAction="#onclick_mitemOpen" text="Open Existing..." />
                </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Export">

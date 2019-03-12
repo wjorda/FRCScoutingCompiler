@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 
 public class CachingBlueAllianceAPIClient extends BlueAllianceAPIClient
 {
+	private static final String TBA_SERVER = "http://www.thebluealliance.com/api/v3/";
 	private String cachingDir;
 
 	private static final DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z");
@@ -48,13 +49,13 @@ public class CachingBlueAllianceAPIClient extends BlueAllianceAPIClient
 			oracle = new URL(url);
 			conn = (HttpURLConnection) oracle.openConnection();
 			conn.setRequestMethod("GET");
-			conn.addRequestProperty("X-TBA-App-Id", getAppId());
+			conn.addRequestProperty("X-TBA-Auth-Key", getAppId());
 			conn.addRequestProperty("If-Modified-Since ", localLastModified);
 
 			int responseCode = conn.getResponseCode();
 
 			if(cache != null && responseCode == HttpURLConnection.HTTP_NOT_MODIFIED) {
-				//System.out.println("Server returned 304. Using cache...");
+				System.out.println("Server returned 304. Using cache...");
 				return cache;
 			}
 			else if (responseCode == HttpURLConnection.HTTP_OK)
@@ -68,8 +69,6 @@ public class CachingBlueAllianceAPIClient extends BlueAllianceAPIClient
 				return result.toString();
 			} else System.out.println(responseCode);
 
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -80,41 +79,36 @@ public class CachingBlueAllianceAPIClient extends BlueAllianceAPIClient
 
 	private String getRequestCode(String url)
 	{
-		String code = url.replace("http://www.thebluealliance.com/api/v2/", "");
+		String code = url.replace(TBA_SERVER, "");
 		code = code.replace("/", "_");
 		return code;
 	}
 
 	private void writeCache (final String text, final String requestCode)
 	{
-		new Thread(new Runnable() {
+		new Thread(() -> {
+			if (text.startsWith("{")) {
+				JSONObject cache = new JSONObject(text);
+				cache.append("last_modified", dateFormat.format(System.currentTimeMillis()));
 
-			@Override
-			public void run()
-			{
-				if (text.startsWith("{")) {
-					JSONObject cache = new JSONObject(text);
-					cache.append("last_modified", dateFormat.format(System.currentTimeMillis()));
-
-					try (BufferedWriter out = new BufferedWriter(new FileWriter(cachingDir + requestCode + ".json"))) {
-						cache.write(out);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} else if (text.startsWith("[")) {
-					JSONArray cache = new JSONArray(text);
-					JSONObject cacheObject = new JSONObject();
-					cacheObject.put("last_modified", dateFormat.format(System.currentTimeMillis()));
-					cacheObject.put("cache_array", cache);
-
-					try (BufferedWriter out = new BufferedWriter(new FileWriter(cachingDir + requestCode + ".json"))) {
-						cacheObject.write(out);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+				try (BufferedWriter out = new BufferedWriter(new FileWriter(cachingDir + requestCode + ".json"))) {
+					cache.write(out);
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+			} else if (text.startsWith("[")) {
+				JSONArray cache = new JSONArray(text);
+				JSONObject cacheObject = new JSONObject();
+				cacheObject.put("last_modified", dateFormat.format(System.currentTimeMillis()));
+				cacheObject.put("cache_array", cache);
 
+				try (BufferedWriter out = new BufferedWriter(new FileWriter(cachingDir + requestCode + ".json"))) {
+					cacheObject.write(out);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+
 		}).start();
 	}
 

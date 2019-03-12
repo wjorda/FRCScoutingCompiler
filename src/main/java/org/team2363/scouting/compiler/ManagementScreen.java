@@ -1,9 +1,6 @@
 package org.team2363.scouting.compiler;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.*;
@@ -24,6 +21,7 @@ import org.json.CDL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
+import org.team2363.jbluealliance.BlueAllianceAPIClient;
 import org.team2363.jbluealliance.CachingBlueAllianceAPIClient;
 import org.team2363.scouting.compiler.modals.BlueAllianceBox;
 
@@ -58,7 +56,7 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 	public static final int RED1 = 0, RED2 = 1, RED3 = 2, BLUE1 = 3, BLUE2 = 4, BLUE3 = 5;
 
 	private static ManagementScreen instance = null;
-	public static CachingBlueAllianceAPIClient blueAlliance;
+	public static final BlueAllianceAPIClient blueAlliance = readTBAProps();
 	private static final FileChooser.ExtensionFilter scoutFilter = new FileChooser.ExtensionFilter("Scouting Data Files (*.scout)", "*.scout");
 	private static final FileChooser.ExtensionFilter xmlFilter = new FileChooser.ExtensionFilter("Scouting Scoresheet Files (*.xml)", "*.xml");
 	private static final FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Comma Separated Values Files (*.csv)", "*.csv");
@@ -72,13 +70,6 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 	private MatchData[][] matchData;
 	private List<Field> fields = new ArrayList<Field>();
 
-	static {
-		try {
-			blueAlliance = new CachingBlueAllianceAPIClient("frc2363:scouting-manager:v1", Files.createTempDirectory("bluealliance").toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public ManagementScreen()
 	{
@@ -424,6 +415,21 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 		deviceLoader.requestFinish();
 	}
 
+	private static BlueAllianceAPIClient readTBAProps() {
+		try(InputStream is = new FileInputStream("tba.properties")) {
+			Properties props = new Properties();
+			props.load(is);
+			String appId = props.getProperty("tba.appId");
+			String cachename = props.getProperty("tba.cachedir");
+			String cacheDir = Files.createTempDirectory(cachename).toString() + File.separator;
+
+			return new CachingBlueAllianceAPIClient(appId, cacheDir);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	private class UpdateFiles extends Thread
 	{
 		private boolean requestFinish = false;
@@ -442,7 +448,7 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 			}
 		}
 
-		public synchronized void requestFinish()
+		synchronized void requestFinish()
 		{
 			requestFinish = true;
 		}

@@ -29,7 +29,7 @@ public class Alliance
 				declines[i] = declinesJSON.getString(i);
 			this.score = 0;
 		} else {
-			JSONArray teamsJSON = json.getJSONArray("teams");
+			JSONArray teamsJSON = json.getJSONArray("team_keys");
 			teams = new String[teamsJSON.length()];
 			for (int i = 0; i < teamsJSON.length(); i++)
 				teams[i] = teamsJSON.getString(i);

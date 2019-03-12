@@ -15,6 +15,7 @@ import java.util.List;
 
 public class BlueAllianceAPIClient
 {
+	private static final String TBA_SERVER = "http://www.thebluealliance.com/api/v3/";
 	private final String appId;
 
 	public BlueAllianceAPIClient (String appId)
@@ -24,7 +25,7 @@ public class BlueAllianceAPIClient
 
 	public Team teamRequest (int number)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/team/frc" + number,
+		String url = TBA_SERVER + "team/frc" + number,
 				code = "team_"+number;
 
 		JSONObject jsonTeam = new JSONObject(getHTML(url));
@@ -33,7 +34,7 @@ public class BlueAllianceAPIClient
 
 	public Event[] teamEventRequest (int team, int year)
 	{
-		String url = "http://wwww.thebluealliance.com/api/v2/team/frc" + team + "/" + year + "/events";
+		String url = TBA_SERVER + "team/frc" + team + "/" + year + "/events";
 		JSONArray jsonEvents = new JSONArray(getHTML(url));
 		Event[] events = new Event[jsonEvents.length()];
 		for (int i = 0; i < events.length; i++)
@@ -44,7 +45,7 @@ public class BlueAllianceAPIClient
 
 	public Award[] teamEventAwardRequest (int team, int year, String eventCode)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/team/frc" + team + "/event/" + year + eventCode + "/awards";
+		String url = TBA_SERVER + "team/frc" + team + "/event/" + year + eventCode + "/awards";
 		JSONArray jsonAwards = new JSONArray(getHTML(url));
 		Award[] awards = new Award[jsonAwards.length()];
 
@@ -55,7 +56,7 @@ public class BlueAllianceAPIClient
 
 	public Match[] teamEventMatchRequest (int team, int year, String eventCode)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/team/frc" + team + "/event/" + year + eventCode + "/matches";
+		String url = TBA_SERVER + "team/frc" + team + "/event/" + year + eventCode + "/matches";
 		JSONArray jsonMatches = new JSONArray(getHTML(url));
 		Match[] matches = new Match[jsonMatches.length()];
 
@@ -66,7 +67,7 @@ public class BlueAllianceAPIClient
 
 	public int[] teamYearsParticipatedRequest (int team)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/team/frc" + team + "/years_participated";
+		String url = TBA_SERVER + "team/frc" + team + "/years_participated";
 		JSONArray jsonYears = new JSONArray(getHTML(url));
 		int[] years = new int[jsonYears.length()];
 		for(int i=0; i<years.length; i++) years[i] = jsonYears.getInt(i);
@@ -75,7 +76,7 @@ public class BlueAllianceAPIClient
 
 	public TeamMedia[] teamMediaRequest (int team, int year)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/team/frc" + team + "/" + year + "/media";
+		String url = TBA_SERVER + "team/frc" + team + "/" + year + "/media";
 		JSONArray jsonMedia = new JSONArray(getHTML(url));
 		TeamMedia[] media = new TeamMedia[jsonMedia.length()];
 		for(int i=0; i<media.length; i++) media[i] = new TeamMedia(jsonMedia.getJSONObject(i));
@@ -84,7 +85,7 @@ public class BlueAllianceAPIClient
 
 	public Event[] eventListRequest (int year)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/events/" + year;
+		String url = TBA_SERVER + "events/" + year;
 		JSONArray jsonEvents = new JSONArray(getHTML(url));
 		Event[] events = new Event[jsonEvents.length()];
 		for(int i=0; i<events.length; i++) events[i] = new Event(jsonEvents.getJSONObject(i), true);
@@ -93,13 +94,13 @@ public class BlueAllianceAPIClient
 
 	public Event eventRequest (int year, String code)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/event/" + year + code;
+		String url = TBA_SERVER + "event/" + year + code;
 		return new Event(new JSONObject(getHTML(url)), true);
 	}
 
 	public Team[] eventTeamRequest (int year, String code)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/event/" + year + code + "/teams";
+		String url = TBA_SERVER + "event/" + year + code + "/teams";
 		JSONArray jsonTeams = new JSONArray(getHTML(url));
 		Team[] teams = new Team[jsonTeams.length()];
 		for(int i=0; i<teams.length; i++) teams[i] = new Team(jsonTeams.getJSONObject(i));
@@ -108,7 +109,7 @@ public class BlueAllianceAPIClient
 
 	public Match[] eventMatchRequest (int year, String code)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/event/" + year + code + "/matches";
+		String url = TBA_SERVER + "event/" + year + code + "/matches";
 		JSONArray jsonMatches = new JSONArray(getHTML(url));
 		Match[] matches = new Match[jsonMatches.length()];
 		for(int i=0; i<matches.length; i++) matches[i] = new Match(jsonMatches.getJSONObject(i));
@@ -118,7 +119,7 @@ public class BlueAllianceAPIClient
 
 	public List<Match> eventMatchRequest (int year, String code, MatchCompetitionLevel level)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/event/" + year + code + "/matches";
+		String url = TBA_SERVER + "event/" + year + code + "/matches";
 		JSONArray jsonMatches = new JSONArray(getHTML(url));
 		List<Match> matches = new ArrayList<Match>();
 		for(int i=0; i<jsonMatches.length(); i++) {
@@ -131,19 +132,19 @@ public class BlueAllianceAPIClient
 
 	public EventStats eventStatsRequest (int year, String code)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/event/" + year + code + "/stats";
+		String url = TBA_SERVER + "event/" + year + code + "/stats";
 		return new EventStats(new JSONObject(getHTML(url)));
 	}
 
 	public EventRankings eventRankingsRequest (int year, String code)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/event/" + year + code + "/rankings";
+		String url = TBA_SERVER + "event/" + year + code + "/rankings";
 		return new EventRankings(new JSONArray(getHTML(url)));
 	}
 	
 	public Award[] eventRewardRequest (int year, String code)
 	{
-		String url = "http://www.thebluealliance.com/api/v2/event/" + year + code + "/awards";
+		String url = TBA_SERVER + "event/" + year + code + "/awards";
 		JSONArray jsonAwards = new JSONArray(getHTML(url));
 		Award[] awards = new Award[jsonAwards.length()];
 		for(int i=0; i<awards.length; i++) awards[i] = new Award(jsonAwards.getJSONObject(i));
@@ -153,7 +154,7 @@ public class BlueAllianceAPIClient
 	public Match singleMatchRequest (int year, String code, MatchCompetitionLevel level, int levelNum, int setNumber)
 	{
 		String set = year + code + "_" + level.getTag() + levelNum + "m" + setNumber;
-		String url = "http://www.thebluealliance.com/api/v2/match/" + set;
+		String url = TBA_SERVER + "match/" + set;
 		return new Match(new JSONObject(getHTML(url)));
 	}
 
@@ -161,25 +162,34 @@ public class BlueAllianceAPIClient
 	{
 		URL oracle;
 		HttpURLConnection conn;
-		BufferedReader rd;
+		BufferedReader rd = null;
 		String line;
 		StringBuilder result = new StringBuilder();
 		try {
 			oracle = new URL(url);
 			conn = (HttpURLConnection) oracle.openConnection();
 			conn.setRequestMethod("GET");
-			conn.addRequestProperty("X-TBA-App-Id", appId);
+			conn.addRequestProperty("X-TBA-Auth-Key", appId);
 			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			while ((line = rd.readLine()) != null) {
 				result.append(line).append("\n");
 			}
-			rd.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (rd != null) {
+				try {
+					rd.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		return result.toString();
+		String res = result.toString();
+		System.out.println("Server responded with: " + res);
+		return res;
 	}
 
 	public String getAppId()
