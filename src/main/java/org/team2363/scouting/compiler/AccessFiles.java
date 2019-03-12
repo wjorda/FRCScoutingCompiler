@@ -14,7 +14,7 @@ public class AccessFiles
 		String os = System.getProperty("os.name");
 		//System.out.println("OS: " + os);
 		if(os.startsWith("Windows")) scanWindows();
-		else if (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0) scanUnix();
+		else if (os.contains("nix") || os.contains("nux") || os.indexOf("aix") > 0) scanUnix();
 	}
 
 	private static void scanUnix()

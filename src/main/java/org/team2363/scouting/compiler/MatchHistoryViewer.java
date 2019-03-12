@@ -41,7 +41,7 @@ public class MatchHistoryViewer
 	public static MatchHistoryViewer getInstance(int team)
 	{
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(MatchHistoryViewer.class.getResource("../../../../../resources/match_history.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(MatchHistoryViewer.class.getResource("/match_history.fxml"));
 			Parent root = fxmlLoader.load();
 			MatchHistoryViewer instance = fxmlLoader.getController();
 			instance.team = team;

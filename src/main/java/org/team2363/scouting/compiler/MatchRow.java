@@ -63,7 +63,7 @@ public class MatchRow
 	
 	public static MatchRow getInstance(int matchNum) throws IOException
 	{
-		FXMLLoader loader = new FXMLLoader(MatchRow.class.getResource("../../../../../resources/match_row.fxml"));
+		FXMLLoader loader = new FXMLLoader(MatchRow.class.getResource("/match_row.fxml"));
 		ManagementScreen mgmt = ManagementScreen.getInstance();
 		HBox root = loader.load();
 		MatchRow instance = loader.getController();
