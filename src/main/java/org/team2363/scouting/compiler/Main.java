@@ -22,7 +22,7 @@ public class Main extends Application {
 	@Override
     public void start(Stage primaryStage) throws Exception {
 	    window = ManagementScreen.getInstance();
-	    this.primaryStage = primaryStage;
+	    Main.primaryStage = primaryStage;
         primaryStage.setTitle("Triple Helix Scouting Manager");
         primaryStage.setScene(new Scene(window.getView(), 900, 650));
         primaryStage.show();

@@ -3,16 +3,11 @@ package org.team2363.scouting.compiler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +63,7 @@ public class MatchRow
 	
 	public static MatchRow getInstance(int matchNum) throws IOException
 	{
-		FXMLLoader loader = new FXMLLoader(MatchRow.class.getResource("match_row.fxml"));
+		FXMLLoader loader = new FXMLLoader(MatchRow.class.getResource("../../../../../resources/match_row.fxml"));
 		ManagementScreen mgmt = ManagementScreen.getInstance();
 		HBox root = loader.load();
 		MatchRow instance = loader.getController();

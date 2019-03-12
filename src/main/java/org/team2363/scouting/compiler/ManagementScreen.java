@@ -141,7 +141,7 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 	public static ManagementScreen getInstance()
 	{
 		if (instance == null) try {
-			FXMLLoader loader = new FXMLLoader(MatchRow.class.getResource("management.fxml"));
+			FXMLLoader loader = new FXMLLoader(MatchRow.class.getResource("/management.fxml"));
 			Parent root = loader.load();
 			instance = loader.getController();
 			instance.view = root;

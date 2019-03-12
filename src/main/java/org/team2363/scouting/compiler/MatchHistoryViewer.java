@@ -1,25 +1,19 @@
 package org.team2363.scouting.compiler;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,7 +41,7 @@ public class MatchHistoryViewer
 	public static MatchHistoryViewer getInstance(int team)
 	{
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(MatchHistoryViewer.class.getResource("match_history.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(MatchHistoryViewer.class.getResource("../../../../../resources/match_history.fxml"));
 			Parent root = fxmlLoader.load();
 			MatchHistoryViewer instance = fxmlLoader.getController();
 			instance.team = team;

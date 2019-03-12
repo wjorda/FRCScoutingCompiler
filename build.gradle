@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+group 'org.team2363'
+version '2.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+mainClassName = "$moduleName/org.team2363.scouting.compiler.Main"
+
+def java_home = hasProperty('org.gradle.java.home') ? getProperty('org.gradle.java.home') : System.getenv('JAVA_HOME')
+
+dependencies {
+    compile group: 'org.json', name: 'json', version: '20180813'
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task jlink(type: Exec) {
+    dependsOn 'clean'
+    dependsOn 'jar'
+
+    workingDir 'build'
+
+    if (java_home == null) {
+        throw new RuntimeException("java_home is not defined.")
+    }
+
+    commandLine "${java_home}/bin/jlink", '--module-path', "libs",
+            '--add-modules', "${moduleName}", '--output', "${moduleName}", '--strip-debug',
+            '--compress', '2', '--no-header-files', '--no-man-pages'
+}

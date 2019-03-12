@@ -9,8 +9,6 @@ import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 public class MatchData
 {
 	private JSONObject data;
