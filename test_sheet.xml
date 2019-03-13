@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scouting>
+    <group name="Counters"/>
+    <counter id="counter1" name="Counter 1" initValue="0" index="1"/>
+    <counter id="counter2" name="Counter 2" initValue="50" index="2"/>
+    <group name="Checkboxes"/>
+    <checkbox id="checkbox1" name="Checkbox 1" index="3"/>
+    <checkbox id="checkbox2" name="Checkbox 2" index="4"/>
+    <group name="Ratings"/>
+    <rating id="rating1" name="3-Star Rating" scale="3" index="5"/>
+    <rating id="rating2" name="6-Star Rating" scale="6" index="6"/>
+    <rating id="rating2" name="10-Star Rating" scale="10" index="7"/>
+    <group name="Notes"/>
+    <notes id="notes" hint="Enter notes about things here!" index="8"/>
+</scouting>
