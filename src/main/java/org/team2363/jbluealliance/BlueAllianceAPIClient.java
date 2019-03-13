@@ -15,7 +15,8 @@ import java.util.List;
 
 public class BlueAllianceAPIClient
 {
-	private static final String TBA_SERVER = "http://www.thebluealliance.com/api/v3/";
+	protected static final String TBA_SERVER = "https://www.thebluealliance.com/api/v3/";
+
 	private final String appId;
 
 	public BlueAllianceAPIClient (String appId)

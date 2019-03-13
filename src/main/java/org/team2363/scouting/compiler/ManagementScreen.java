@@ -28,42 +28,31 @@ import org.team2363.scouting.compiler.modals.BlueAllianceBox;
 public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 {
 
-	//FXML Guff
-	@FXML
-	private ResourceBundle resources;
-
-	@FXML
-	private URL location;
-
-	@FXML
-	private VBox vbox_detail_content;
-
-	@FXML
-	private VBox vbox_match_list;
-
-	@FXML
-	private Button btn_show_history;
-
-	@FXML
-	private MenuItem mitem_new;
-
-	@FXML
-	private MenuItem mitem_open;
-
-	@FXML
-	private Label lbl_detail_header;
-
 	public static final int RED1 = 0, RED2 = 1, RED3 = 2, BLUE1 = 3, BLUE2 = 4, BLUE3 = 5;
-
-	private static ManagementScreen instance = null;
 	public static final BlueAllianceAPIClient blueAlliance = readTBAProps();
 	private static final FileChooser.ExtensionFilter scoutFilter = new FileChooser.ExtensionFilter("Scouting Data Files (*.scout)", "*.scout");
 	private static final FileChooser.ExtensionFilter xmlFilter = new FileChooser.ExtensionFilter("Scouting Scoresheet Files (*.xml)", "*.xml");
 	private static final FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Comma Separated Values Files (*.csv)", "*.csv");
 	private static final FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt");
-
+	private static ManagementScreen instance = null;
 	private final UpdateFiles deviceLoader;
-
+	//FXML Guff
+	@FXML
+	private ResourceBundle resources;
+	@FXML
+	private URL location;
+	@FXML
+	private VBox vbox_detail_content;
+	@FXML
+	private VBox vbox_match_list;
+	@FXML
+	private Button btn_show_history;
+	@FXML
+	private MenuItem mitem_new;
+	@FXML
+	private MenuItem mitem_open;
+	@FXML
+	private Label lbl_detail_header;
 	private Parent view;
 	private ArrayList<MatchRow> matchRows = new ArrayList<MatchRow>();
 	private File out, scoresheet;
@@ -75,6 +64,35 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 	{
 		deviceLoader = new UpdateFiles();
 		deviceLoader.start();
+	}
+
+	public static ManagementScreen getInstance()
+	{
+		if (instance == null) try {
+			FXMLLoader loader = new FXMLLoader(MatchRow.class.getResource("/management.fxml"));
+			Parent root = loader.load();
+			instance = loader.getController();
+			instance.view = root;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return instance;
+	}
+
+	private static BlueAllianceAPIClient readTBAProps() {
+		try(InputStream is = new FileInputStream("tba.properties")) {
+			Properties props = new Properties();
+			props.load(is);
+			String appId = props.getProperty("tba.appId");
+			String cachename = props.getProperty("tba.cachedir");
+			String cacheDir = Files.createTempDirectory(cachename).toString() + File.separator;
+
+			return new CachingBlueAllianceAPIClient(appId, cacheDir);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public MatchData getMatchData(int matchNum, int team, boolean flag)
@@ -127,20 +145,6 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 		System.out.println("Schedule finished loading!");
 		System.out.println(vbox_match_list.getChildren().size());
 		writeJSONOutput();
-	}
-
-	public static ManagementScreen getInstance()
-	{
-		if (instance == null) try {
-			FXMLLoader loader = new FXMLLoader(MatchRow.class.getResource("/management.fxml"));
-			Parent root = loader.load();
-			instance = loader.getController();
-			instance.view = root;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return instance;
 	}
 
 	protected void changeSelectedTeam(MatchData match)
@@ -413,21 +417,6 @@ public class ManagementScreen implements ScheduleLoader.OnScheduleLoadedListener
 	public void requestFinish()
 	{
 		deviceLoader.requestFinish();
-	}
-
-	private static BlueAllianceAPIClient readTBAProps() {
-		try(InputStream is = new FileInputStream("tba.properties")) {
-			Properties props = new Properties();
-			props.load(is);
-			String appId = props.getProperty("tba.appId");
-			String cachename = props.getProperty("tba.cachedir");
-			String cacheDir = Files.createTempDirectory(cachename).toString() + File.separator;
-
-			return new CachingBlueAllianceAPIClient(appId, cacheDir);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	private class UpdateFiles extends Thread

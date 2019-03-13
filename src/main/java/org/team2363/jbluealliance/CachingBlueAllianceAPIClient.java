@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 
 public class CachingBlueAllianceAPIClient extends BlueAllianceAPIClient
 {
-	private static final String TBA_SERVER = "http://www.thebluealliance.com/api/v3/";
 	private String cachingDir;
 
 	private static final DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z");
@@ -79,7 +78,7 @@ public class CachingBlueAllianceAPIClient extends BlueAllianceAPIClient
 
 	private String getRequestCode(String url)
 	{
-		String code = url.replace(TBA_SERVER, "");
+		String code = url.replace(BlueAllianceAPIClient.TBA_SERVER, "");
 		code = code.replace("/", "_");
 		return code;
 	}
